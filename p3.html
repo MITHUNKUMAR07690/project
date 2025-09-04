@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>School Competition Invitation</title>
+  <style>
+    :root {
+      --paper: #d70e0ec8;
+      --ink: #1b1b1b;
+      --accent: #2f5aa6;   /* frame color */
+      --accent-2: #68f442; /* highlight color */
+      --muted: #fbf4f5;    /* light background */
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #eef3ff 0%, #ffffff 60%);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+
+    /* A4 sheet sizing for print & on-screen */
+    .sheet {
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--paper);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+      position: relative;
+    }
+
+    /* Big outer frame */
+    .frame {
+      position: absolute;
+      inset: 12mm; /* distance from page edge */
+      border: 7px solid var(--accent);
+      border-radius: 10px;
+      padding: 12mm;
+    }
+
+    /* Corner flourish */
+    .frame::before,
+    .frame::after {
+      content: "";
+      position: absolute;
+      width: 70px; height: 70px;
+      border: 4px solid var(--accent);
+      border-radius: 12px;
+      opacity: .25;
+    }
+    .frame::before { top: -14px; left: -14px; border-right: none; border-bottom: none; }
+    .frame::after  { bottom: -14px; right: -14px; border-left: none; border-top: none; }
+
+    header {
+      text-align: center;
+      margin-bottom: 10mm;
+    }
+
+    .logo {
+      width: 64px; height: 64px;
+      margin-inline: auto 0; /* keeps centered with text below */
+      background: conic-gradient(from 180deg, var(--accent), var(--accent-2));
+      border-radius: 50%;
+      display: grid; place-items: center;
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: .5px;
+      margin-bottom: 8px;
+    }
+
+    .school-name { font-size: 14px; letter-spacing: .5px; text-transform: uppercase; opacity: .8; }
+    .title { font-size: 32px; line-height: 1.15; margin: 6px 0 2px; font-weight: 800; }
+    .subtitle { font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+
+    .lead {
+      text-align: center;
+      margin: 8mm auto 12mm;
+      max-width: 150mm;
+      font-size: 16px;
+    }
+
+    /* Three boxes inside the big frame */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10mm;
+      margin-bottom: 12mm;
+    }
+
+    .card {
+      background: var(--muted);
+      border: 2px solid rgba(47,90,166,0.15);
+      border-radius: 12px;
+      padding: 8mm;
+    }
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .card p, .card li { font-size: 15px; line-height: 1.5; }
+
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 14px;
+      border-top: 2px dashed rgba(0,0,0,.15);
+      padding-top: 8mm;
+    }
+
+    .print-cta {
+      position: fixed;
+      right: 16px; bottom: 16px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      padding: 12px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    }
+
+    /* Responsive (mobile preview) */
+    @media (max-width: 900px) {
+      .sheet { width: 100%; min-height: auto; }
+      .frame { position: static; margin: 12px; padding: 18px; }
+      .info-grid { grid-template-columns: 1fr; gap: 14px; }
+    }
+
+    /* Print setup */
+    @media print {
+      body { background: #fff; }
+      .sheet { box-shadow: none; }
+      .print-cta { display: none; }
+      @page { size: A4; margin: 8mm; }
+    }
+  </style>
+</head>
+<body>
+  <button class="print-cta" onclick="window.print()">Print / Save as PDF</button>
+
+  <main class="sheet">
+    <div class="frame">
+      <header>
+        <div class="logo" aria-hidden="true">★</div>
+        <div class="school-name">LOVELY PROFFESIONAL UNIVERSITY</div>
+        <div class="title">ANNUAL TECH MIXER</div>
+        <div class="subtitle">Invitation</div>
+      </header>
+
+      <p class="lead">
+        We are delighted to invite students to participate in our annual school competition.
+        Join us for a day of creativity, sportsmanship, and learning!
+      </p>
+
+      <section class="info-grid">
+        <!-- Box 1 -->
+        <article class="card">
+          <h3>Event Details</h3>
+          <p><span class="badge">When</span><br>
+            <strong>Date:</strong> 12 October 2025 (Sunday)<br>
+            <strong>Time:</strong> 9:00 AM – 4:30 PM
+          </p>
+          <p><span class="badge">Where</span><br>
+            <strong>Venue:</strong> School Auditorium & Grounds
+          </p>
+        </article>
+
+        <!-- Box 2 -->
+        <article class="card">
+          <h3>Categories</h3>
+          <ul>
+            <li>IT IS MAINLY A GAMING COMPETITION</li>
+            <li>FREEFIRE</li>
+            <li>BATTLE GROUND MOBILE INDIA</li>
+            <li>CHESS</li>
+            <li>CARROM BOARD</li>
+          </ul>
+        </article>
+
+        <!-- Box 3 -->
+        <article class="card">
+          <h3>Registration & Contact</h3>
+          <p>
+            <strong>Register by:</strong> 30 September 2025<br>
+            <strong>Fee:</strong> it is free for all who are studying in the university
+          </p>
+          <p>
+            <strong>Teacher‑in‑Charge:</strong> Ms.sania<br>
+            <strong>Email:</strong> lpu@gmail.com<br>
+            <strong>Phone:</strong> +91 8124635009
+          </p>
+        </article>
+      </section>
+
+      <footer>
+        Guests, parents, and well‑wishers are warmly welcome. Dress code: School uniform or smart casuals
+        <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Page with CSE CORE LPU Photo</title>
+  <style>
+    body { margin:0; font-family: Arial, sans-serif; }
+    header {
+      padding: 18px 10px;
+      text-align: center;
+      border-bottom: 2px solid #000;
+      background: #fff;
+    }
+    /* image styles */
+    .top-photo {
+      width: 80px;            /* small size */
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;     /* rounded corners; use 50% for circle */
+      border: 2px solid #000;
+      vertical-align: middle;
+    }
+    /* optional caption/text next to photo */
+    .brand {
+      display: inline-block;
+      margin-left: 12px;
+      vertical-align: middle;
+      font-weight: 700;
+      font-size: 18px;
+      color: #000;
+    }
+    @media (max-width:480px){
+      .top-photo { width:56px; height:56px; }
+      .brand { font-size:14px; margin-left:8px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="cse-core-lpu.jpg" alt="CSE CORE LPU" class="top-photo">
+  <span class="brand">CSE CORE LPU</span>
+</header>
+
+<main style="padding:20px;">
+  <h2>Welcome</h2>
+  <p>Page content goes here.</p>
+</main>
+
+
+
+</body>
+</html>
+
+</body>
+</html>
+
+

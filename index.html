@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <style>
+    :root {
+      --bg: #0f172a;          /* slate-900 */
+      --card: #111827;        /* gray-900 */
+      --muted: #94a3b8;       /* slate-400 */
+      --text: #e5e7eb;        /* gray-200 */
+      --accent: #4f46e5;      /* indigo-600 */
+      --accent-2: #22c55e;    /* green-500 */
+      --border: #1f2937;      /* gray-800 */
+      --danger: #ef4444;      /* red-500 */
+      --focus: #60a5fa;       /* blue-400 */
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 50% -10%, #1e293b 0%, var(--bg) 60%);
+      color: var(--text);
+      display: grid; place-items: center; padding: 24px;
+    }
+
+    .card {
+      width: 100%; max-width: 420px; background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 26px; box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    .title { font-size: 1.5rem; font-weight: 700; margin: 0 0 6px; }
+    .subtitle { margin: 0 0 18px; color: var(--muted); font-size: .95rem; }
+
+    .btn {
+      width: 100%; display: inline-flex; align-items: center; gap: 10px;
+      border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px;
+      background: #0b1220; color: var(--text); font-weight: 600; cursor: pointer;
+      transition: transform .06s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); border-color: #334155; box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+    .btn:active { transform: translateY(0); }
+
+    .btn svg { width: 18px; height: 18px; }
+    .btn.google { background: linear-gradient(180deg, #0b1220, #0b1220); }
+    .btn.apple { background: linear-gradient(180deg, #0b1220, #0b1220); }
+
+    .or { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; color: var(--muted); margin: 16px 0; }
+    .or::before, .or::after { content: ""; height: 1px; background: var(--border); }
+
+    form { display: grid; gap: 12px; }
+    label { font-size: .9rem; color: var(--text); }
+    .field { display: grid; gap: 6px; }
+
+    .input-wrap { position: relative; }
+    input[type="email"], input[type="password"] {
+      width: 100%; background: #0b1220; border: 1px solid var(--border); color: var(--text);
+      padding: 12px 42px 12px 12px; border-radius: 12px; outline: none; font-size: 0.98rem;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    input:focus { border-color: var(--focus); box-shadow: 0 0 0 3px rgba(96,165,250,.2); }
+
+    .toggle-eye {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      background: transparent; border: 0; color: var(--muted); cursor: pointer; padding: 4px;
+    }
+
+    .row { display: flex; justify-content: space-between; align-items: center; }
+    .remember { display: inline-flex; gap: 8px; align-items: center; color: var(--muted); font-size: .9rem; }
+
+    .submit {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2)); border: none;
+      color: white; padding: 12px 16px; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer;
+      transition: transform .06s ease, box-shadow .2s ease; width: 100%;
+    }
+    .submit:hover { transform: translateY(-1px); box-shadow: 0 10px 20px rgba(79,70,229,.35); }
+
+    .error { color: var(--danger); font-size: .9rem; min-height: 1.1em; }
+    .tiny { color: var(--muted); font-size: .8rem; text-align: center; margin-top: 12px; }
+
+    .footer-links { display: flex; justify-content: center; gap: 12px; margin-top: 6px; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: .85rem; }
+    .footer-links a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="card" role="dialog" aria-labelledby="login-title" aria-describedby="login-subtitle">
+    <h1 id="login-title" class="title">Welcome back</h1>
+    <p id="login-subtitle" class="subtitle">Login with Google, Apple, or your email</p>
+
+    <!-- Social providers -->
+    <button class="btn google" id="googleBtn" aria-label="Continue with Google">
+      <!-- Google G logo (SVG) -->
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M12 10.2v3.9h5.5c-.2 1.3-1.7 3.8-5.5 3.8a6.4 6.4 0 1 1 0-12.8 5.6 5.6 0 0 1 4 1.6l2.7-2.6A9.6 9.6 0 1 0 12 21.6c5.5 0 9.2-3.9 9.2-9.3 0-.6-.1-1.1-.2-1.6H12z"/></svg>
+      Continue with Google
+    </button>
+
+    <div style="height: 10px"></div>
+
+    <button class="btn apple" id="appleBtn" aria-label="Continue with Apple">
+      <!-- Apple logo (SVG) -->
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.47 2.24-1.3 3.09-.83.84-2.2 1.49-3.35 1.38-.14-1.09.48-2.24 1.28-3.01.86-.85 2.34-1.47 3.37-1.46.01.03.01.07.01.1zM20.98 17.01c-.7 1.62-1.57 3.21-2.82 3.21-1.21 0-1.6-.79-3-.79-1.41 0-1.87.77-3.04.82-1.22.05-2.15-1.75-2.87-3.37-1.56-3.45-1.74-7.49-.77-9.63.86-1.88 2.49-3.08 4.38-3.08 1.29 0 2.37.87 3 .87.6 0 1.86-1.07 3.15-.91.54.02 2.06.22 3.04 1.67-.08.05-1.82 1.06-1.79 3.17.02 2.52 2.2 3.35 2.22 3.36-.02.06-.35 1.2-1.5 2.68z"/></svg>
+      Continue with Apple
+    </button>
+
+    <div class="or" role="separator" aria-label="or">or</div>
+
+    <!-- Email/password form -->
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label for="email">Email address</label>
+        <div class="input-wrap">
+          <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <input id="password" name="password" type="password" placeholder="••••••••" autocomplete="current-password" minlength="6" required />
+          <button type="button" class="toggle-eye" id="togglePwd" aria-label="Show or hide password">
+            <svg id="eyeIcon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <label class="remember">
+          <input type="checkbox" id="remember" /> Remember me
+        </label>
+        <a href="#" style="color: var(--muted); font-size: .9rem; text-decoration: none;">Forgot password?</a>
+      </div>
+
+      <div class="error" id="errorMsg" aria-live="polite"></div>
+
+      <!-- Final login button -->
+      <button class="submit" id="finalLogin" type="submit">Login</button>
+    </form>
+
+    <p class="tiny">By continuing, you agree to our <a href="#" style="color: #93c5fd;">Terms</a> and <a href="#" style="color: #93c5fd;">Privacy Policy</a>.</p>
+    <div class="footer-links">
+      <a href="#">Create account</a>
+      <span>·</span>
+      <a href="#">Help</a>
+    </div>
+  </div>
+
+  <script>
+    // Placeholder handlers for social buttons. Replace these with your real OAuth flows.
+    document.getElementById('googleBtn').addEventListener('click', () => {
+      alert('TODO: Hook this to your Google OAuth flow.');
+    });
+
+    document.getElementById('appleBtn').addEventListener('click', () => {
+      alert('TODO: Hook this to your Apple Sign in flow.');
+    });
+
+    // Toggle show/hide password
+    const pwd = document.getElementById('password');
+    const toggle = document.getElementById('togglePwd');
+    const eyeIcon = document.getElementById('eyeIcon');
+    toggle.addEventListener('click', () => {
+      const isPw = pwd.type === 'password';
+      pwd.type = isPw ? 'text' : 'password';
+      eyeIcon.setAttribute('d', isPw
+        ? 'M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z'
+        : 'M2 12s4-7 10-7c2.1 0 3.9.7 5.3 1.6L19 5l2 2-1.4 1.4C21.3 9.8 22 12 22 12s-4 7-10 7c-2.1 0-3.9-.7-5.3-1.6L5 19l-2-2 1.4-1.4C2.7 14.2 2 12 2 12zm10-5a5 5 0 0 0-5 5c0 .9.2 1.7.6 2.4l6.8-6.8C13.7 7.2 12.9 7 12 7zm0 10a5 5 0 0 0 5-5c0-.9-.2-1.7-.6-2.4l-6.8 6.8c.7.4 1.5.6 2.4.6z');
+    });
+
+    // Basic client-side validation demo
+    const form = document.getElementById('loginForm');
+    const errorMsg = document.getElementById('errorMsg');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      errorMsg.textContent = '';
+
+      const email = (document.getElementById('email').value || '').trim();
+      const password = (document.getElementById('password').value || '').trim();
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorMsg.textContent = 'Please enter a valid email address.';
+        return;
+      }
+      if (!password || password.length < 6) {
+        errorMsg.textContent = 'Password must be at least 6 characters.';
+        return;
+      }
+
+      // In production, send to your server via fetch('/api/login', { method: 'POST', body: ... })
+      alert(`Logging in as ${email}. (Replace this with your real login call.)`);
+      form.reset();
+    });
+  </script>
+</body>
+</html>
